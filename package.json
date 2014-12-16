@@ -1,0 +1,16 @@
+{
+  "name": "ucsc-page-fetcher",
+  "version": "0.0.1",
+  "description": "Fetch a web page and prepare it for email.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rob Knight",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "cheerio": "~0.13.1",
+    "juice": "^0.5.0",
+    "request": "~2.33.0"
+  }
+}
