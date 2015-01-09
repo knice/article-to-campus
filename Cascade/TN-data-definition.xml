@@ -35,7 +35,8 @@
       <asset type="file" identifier="image" label="200px wide image"/>
       <group identifier="article-links" label="News article links" multiple="true" collapsed="true">
         <asset type="page" identifier="page" label="Select a news article" render-content-depth="4" help-text="Shows a linked title only"/>
-        <text identifier="headline" label="Optional custom headline"/>
+        <text identifier="url" label="Or paste a URL"/>
+        <text identifier="headline" label="Custom headline"/>
       </group>
       <text wysiwyg="true" identifier="html" label="Or add custom content" wysiwyg-toolbar-remove="font formatting,font assignment,insert table,"/>
     </group>
