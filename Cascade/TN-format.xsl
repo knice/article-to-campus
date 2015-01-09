@@ -36,12 +36,12 @@
       @logic:   Takes a given url and adds GA campaign code to the end.
      -->
     <xsl:template name="make-trackable">
-      <xsl:param name="url-to-track" />
+      <xsl:param name="url-to-track"/>
       <xsl:if test="contains($url-to-track, '?')">
         <xsl:variable name="url-separator">&amp;</xsl:variable>
       </xsl:if>
       <xsl:variable name="url-separator">?</xsl:variable>
-      <xsl:value-of select="$url-to-track" /><xsl:value-of select="$url-separator" /><xsl:value-of select="$tracking-vars" />
+      <xsl:value-of select="$url-to-track"/><xsl:value-of select="$url-separator"/><xsl:value-of select="$tracking-vars"/>
     </xsl:template>
     
 
@@ -159,7 +159,7 @@
               </tr>
               <tr>
                 <td id="last">
-                  <xsl:value-of select="node()"/>
+                  <xsl:copy-of select="node()"/>
                 </td>
               </tr>
             </table>
@@ -465,7 +465,7 @@
             </xsl:if>
 
             <xsl:for-each select="article-links">
-              <xsl:if test="page/path !='/'">
+              <xsl:if test="page/path !='/' or url != ''">
                 
                 <xsl:variable name="headline-text">
                 <xsl:choose>
@@ -477,10 +477,21 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 </xsl:variable>
+
+                <xsl:variable name="url-text">
+                <xsl:choose>
+                    <xsl:when test="url != ''">
+                      <xsl:value-of select="url"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <xsl:value-of select="page/link"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                </xsl:variable>                
                 
               <p>
                 <strong>
-                  <a href="{page/link}{$tracking-vars}"><xsl:value-of select="$headline-text"/></a>
+                  <a href="{$url-text}"><xsl:value-of select="$headline-text"/></a>
                 </strong>
               </p>
             
