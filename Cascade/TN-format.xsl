@@ -484,7 +484,7 @@
                       <xsl:value-of select="url"/>
                     </xsl:when>
                     <xsl:otherwise>
-                      <xsl:value-of select="page/link"/>
+                      <xsl:value-of select="concat(page/link, $tracking-vars)"/>
                     </xsl:otherwise>
                 </xsl:choose>
                 </xsl:variable>                
