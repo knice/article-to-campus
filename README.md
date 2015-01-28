@@ -34,3 +34,7 @@ It's not **nearly** as elegant as I would like it to be. But it does the job for
 - DRY up the part of the script that makes URLs absolute.
 - Remove the requirement that the file be saved before inlining.
 - Make this into a full app that can send email too.
+
+## References
+
+- [Using Google Groups to send campus broadcasts](http://replay.uci.edu/clients/uccsc/SC03.html) (UCCSC, 2013).
