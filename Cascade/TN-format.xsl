@@ -283,8 +283,6 @@
                       <a href="{$article-link}{$tracking-vars}"><strong><xsl:value-of select="$article-title"/></strong></a>
                   </p>
                   <p><xsl:value-of select="$article-description"/></p>
-
-                  <a href="https://plus.google.com/share?url={$share-link}"><img align="left" alt="Google+ Share" border="0" class="social-icon" height="16" src="http://news.ucsc.edu/tuesday-newsday/images/social-share-icons/gp-24.png" width="16"/></a> <a href="https://www.facebook.com/sharer/sharer.php?u={$share-link}"><img align="left" alt="Facebook Share" border="0" class="social-icon" height="16" src="http://news.ucsc.edu/tuesday-newsday/images/social-share-icons/fb-24.png" width="16"/></a> <a href="https://twitter.com/intent/tweet?status={$share-link}"><img align="left" alt="Twitter Share" border="0" class="social-icon" height="16" src="http://news.ucsc.edu/tuesday-newsday/images/social-share-icons/tw-24.png" width="16"/></a>
               </td>
             </tr>
         
@@ -392,8 +390,6 @@
                       </span><br/>
                       <a href="{$link-url}"><strong><xsl:value-of select="$link-title"/></strong></a>
                   </p>
-                
-                <p><a href="https://plus.google.com/share?url={$link-url}"><img align="left" alt="Google+ Share" border="0" class="social-icon" height="16" src="http://news.ucsc.edu/tuesday-newsday/images/social-share-icons/gp-24.png" width="16"/></a> <a href="https://www.facebook.com/sharer/sharer.php?u={$link-url}"><img align="left" alt="Facebook Share" border="0" class="social-icon" height="16" src="http://news.ucsc.edu/tuesday-newsday/images/social-share-icons/fb-24.png" width="16"/></a> <a href="https://twitter.com/intent/tweet?status={$link-url}"><img align="left" alt="Twitter Share" border="0" class="social-icon" height="16" src="http://news.ucsc.edu/tuesday-newsday/images/social-share-icons/tw-24.png" width="16"/></a></p>
               </td>
             </tr>
           
