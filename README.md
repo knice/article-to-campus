@@ -23,9 +23,9 @@ Example:
 ## What it does
 
 1. The page is fetched.
-2. All URLs in the HTML (images, stylesheets, etc) are made absolute.
+2. All URLs in the HTML (images, stylesheets, etc) are made absolute with cheerio.
 3. The file is saved with the name you provided.
-4. The CSS in the file is inlined and saved again.
+4. The CSS in the file is inlined with juice and saved again.
 
 It's not **nearly** as elegant as I would like it to be. But it does the job for now.
 
