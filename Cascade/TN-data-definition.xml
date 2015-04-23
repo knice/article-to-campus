@@ -42,6 +42,7 @@
     </group>
   </group>
   <text wysiwyg="true" identifier="editors-note" label="Editor's note" help-text="Shows just above news articles" wysiwyg-toolbar-remove="font formatting,font assignment,insert table,"/>
+  <text wysiwyg="true" identifier="highlight" label="Highlight area" help-text="Appears directly under the banner image." wysiwyg-toolbar-remove="font formatting,font assignment,insert table,"/>
   <asset type="block" identifier="footer-block" label="Block for footer content" render-content-depth="3"/>
   <text wysiwyg="true" identifier="footer-text" label="Footer text" help-text="Appears as small text below the footer."/>
 </system-data-structure>

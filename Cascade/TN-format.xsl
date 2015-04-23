@@ -70,6 +70,8 @@
           <xsl:apply-templates select="system-data-structure/banner"/>    
         </td>
       </tr>
+
+      <xsl:apply-templates select="system-data-structure/highlight"/>
       
       <!-- Main content row -->
       <tr>
@@ -133,6 +135,25 @@
           <a href="{/system-index-block/calling-page/system-page/link}{$tracking-vars}">
               <img alt="Tuesday Newsday" border="0" height="226" src="{link}" width="600"/>
           </a>
+
+      </xsl:if>
+
+    </xsl:template>
+
+
+    <!-- 
+        HIGHLIGHT AREA
+    -->
+    <xsl:template match="highlight">
+
+      <xsl:if test="node() != ''">
+                
+        <!-- Content for highlight area -->
+         <tr>
+          <td class="highlight" colspan="2">
+            <xsl:copy-of select="node()"/>
+          </td>
+        </tr>
 
       </xsl:if>
 
@@ -370,13 +391,17 @@
               <xsl:otherwise><xsl:value-of select="block/content/system-data-structure/thumbnail/link"/></xsl:otherwise>
             </xsl:choose>
           </xsl:variable>
+          
+          <xsl:variable name="link-uuid">              
+              <xsl:value-of select="translate(substring-after(block/path, '/inthenews/'),'/','-')"/>            
+          </xsl:variable>          
                                          
             <tr>
               <td align="center" valign="top" width="30%">
                   <xsl:if test="position() = last()">
                     <xsl:attribute name="id">last</xsl:attribute>
                   </xsl:if>                
-                  <a href="{$link-url}">
+                  <a data-link-uuid="{$link-uuid}" href="{$link-url}">
                     <img align="top" alt="{$link-source}" border="0" height="60" src="{$link-thumbnail}" width="60"/>
                   </a>
                </td>
@@ -388,7 +413,7 @@
                       <span class="xsmall">
                           <xsl:value-of select="$link-source"/> - <xsl:value-of select="$link-date"/>
                       </span><br/>
-                      <a href="{$link-url}"><strong><xsl:value-of select="$link-title"/></strong></a>
+                      <a data-link-uuid="{$link-uuid}" href="{$link-url}"><strong><xsl:value-of select="$link-title"/></strong></a>
                   </p>
               </td>
             </tr>
@@ -468,8 +493,11 @@
                     <xsl:when test="headline != ''">
                       <xsl:value-of select="headline"/>
                     </xsl:when>
-                    <xsl:otherwise>
+                    <xsl:when test="page/title != ''">
                       <xsl:value-of select="page/title"/>
+                    </xsl:when>                    
+                    <xsl:otherwise>
+                      [system-view:internal]NO HEADLINE SET[/system-view:internal]
                     </xsl:otherwise>
                 </xsl:choose>
                 </xsl:variable>
