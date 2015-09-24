@@ -50,8 +50,8 @@
     -->
     <xsl:template match="system-page">
 
-    <!-- HEADER -->
-    <table border="0" cellpadding="0" cellspacing="0" width="600">
+    <!-- PRE-HEADER -->
+    <table border="0" cellpadding="0" cellspacing="0" width="600" class="preheader">
       <tbody>
       <tr>
         <td align="center">
@@ -61,8 +61,269 @@
       </tr>
       </tbody>
     </table>
+    <!-- END PRE-HEADER -->
+
       
-    <table border="0" cellpadding="0" cellspacing="0" id="main" width="600">
+    
+
+<!-- CONTENT WRAPPER -->
+<table class="wrap" cellpadding="0" cellspacing="0" border="0">
+  <tbody>
+    <tr>
+      <td align="center">
+     
+      <!-- CONTENT --> 
+        
+        <!--[if (gte mso 9)|(IE)]>
+          <table width="600" align="center">
+            <tr>
+              <td>
+        <![endif]-->
+        
+        <table border="0" align="center" cellpadding="0" cellspacing="0" id="content" width="600">
+          <tbody>
+            
+            <tr>
+              <td>
+
+                <table cellpadding="0" cellspacing="0" border="0" align="left" width="421" height="95">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <h1 style="margin:0; padding:15px 0 0 10px; line-height: .75em;">
+                          <span class="blue"><strong>Tuesday</strong></span> <span class="yellow">Newsday</span>
+                        </h1>
+                        <span style="font-size:10px; margin:0 0 0 8px; padding: 0;">VOL. <xsl:value-of select="/system-index-block/calling-page/system-page/system-data-structure/volume"/> &#160;&#160; ISSUE <xsl:value-of select="/system-index-block/calling-page/system-page/system-data-structure/issue"/> - <xsl:value-of select="$display-date"/></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+                <table cellpadding="0" cellspacing="0" border="0" width="175" height="95" valign="center" >
+                  <tbody>
+                    <tr>
+                      <td style="padding-right:10px;">
+                        <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=UCSC-LOGO&w=138&h=41" alt="UC Santa Cruz Logo" width="138" height="41" align="right"/>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </td>
+            </tr>
+            
+            <!-- Feature story photo -->
+            <tr>
+              <td>
+                <xsl:apply-templates select="system-data-structure/banner"/>
+              </td>
+            </tr>
+
+            <!-- Feature story caption -->
+            <tr>
+              <td align="center">
+                <table width="95%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td align="left">
+                      <h3 class="blue"><a href="#">Record-setting toxic algae bloom persists along U.S. West Coast »</a></h3>
+                      <p>An extensive bloom of toxic algae along the West Coast has waxed and waned since first appeared in early May, but it hasn't gone away.</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            
+            <!-- SECTION: title -->
+            <tr>
+              <td align="left" valign="middle" bgcolor="#00458c" style="color:#fff;">
+                <h2 class="section-header">--SECTION TITLE--</h2>
+              </td>
+            </tr>
+
+            <!-- SECTION: item -->
+            <tr>
+              <td align="left" class="section-image">                
+                
+                <!-- ITEM: image -->
+                <table cellpadding="0" cellspacing="0" border="0" align="left" width="250" height="150">
+                  <tr>
+                    <td>
+                      <img src="http://placehold.it/250x150?text=IMAGE" width="250" height="150"/>
+                    </td>
+                  </tr>
+                </table>
+                
+                <!-- ITEM: headline -->
+                <h3 class="item-headline">
+                  <a href="#">Record-setting toxic algae bloom persists along U.S. West Coast</a>
+                </h3>
+
+                <!-- ITEM: subhead -->
+                <p class="item-subhead">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+  
+                <!-- ITEM: teaser -->
+                <p class="item-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+
+              </td>
+            </tr>
+            <!-- END SECTION -->
+            
+
+            
+            <!-- LIST (campus messages) -->
+            <tr>
+              <td align="left" valign="middle" bgcolor="#00458c" style="color:#fff;">
+                <h2 class="section-header">Head's up</h2>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="left">              
+                <ul>
+                  <li class="item-headline--reduced">
+                    <a href="#">Record-setting toxic algae bloom persists along U.S. West Coast</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <!-- END LIST -->
+            
+
+            <!-- SECTION: News links -->
+            <tr>
+              <td align="left" valign="middle" bgcolor="#00458c">
+                <h2 class="section-header">In the news</h2>
+              </td>
+            </tr>
+
+            
+            <tr>
+              <td align="left">
+
+                <!-- ITEM -->                
+                <table cellpadding="0" cellspacing="0" border="0" width="556">
+                  <tbody>
+                    <tr>
+                      <td>
+
+                        <!-- ITEM: Thumbnail -->
+                        <table cellpadding="0" cellspacing="0" border="0" align="left" width="60" height="60">
+                          <tr>
+                            <td>
+                              <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=60×60&w=60&h=60" width="60" height="60" alt="#"/>
+                            </td>
+                          </tr>
+                        </table>
+                        
+                        <!-- ITEM: Meta -->
+                        <p style="margin:0; padding: 0; font-size:.75em;">Source - Date</p>
+                      
+                        <!-- ITEM: Headline -->
+                        <h3 class="item-headline--reduced" style="margin-top: 0; padding-top: 0;">
+                          <a href="#">--Headline--</a>
+                        </h3>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>                
+                <!-- END ITEM --> 
+
+              </td>
+            </tr>
+            <!-- END In the News section -->
+
+
+            <!-- BOTTOM ROW -->
+            <tr>
+              <td align="left" style="padding: 1em 1em 0 1em ">
+
+                <!-- SUB-SECTION -->
+                <table width="268" border="0" cellspacing="0" cellpadding="0" align="left" style="margin-right:1em;">
+                  
+                  <!-- SUB-SECTION HEADER -->
+                  <tr>
+                    <td align="left" valign="middle" bgcolor="#f1b521">
+                      <h2 class="section-header--gold">Events Calendar</h2>
+                    </td>
+                  </tr>
+                  
+                  <!-- SUB-SECTION CONTENT -->
+                  <tr>
+                    <td align="left" valign="middle">
+                      Content... RSS from calendar?                      
+                    </td>
+                  </tr>
+
+                </table>
+                <!-- END SUB-SECTION -->
+
+              </td>
+            </tr>
+            <!-- END BOTTOM ROW -->
+
+            <tr>
+              <td align="left" bgcolor="#00458c" valign="center">
+
+                <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=52×49&w=52&h=49" alt="UC Santa Cruz Campaign Thumb" width="52" height="49" align="left" style="padding: 0 1em 0 1em;">
+
+                <table cellpadding="0" cellspacing="0" border="0" align="left" height="49">
+                  <tbody>
+                    <tr>
+                      <td style="color:#fff; font-size: 12px; line-height: 15px; vertical-align:middle;" valign="middle"> Tuesday Newsday is brought to you by your friends in University Relations.<br />
+                        Thank you for making us proud. <a href="#" style="color:#f1b521">Feedback</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center">
+                Association clause: you get this because...
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center">
+                Privacy policy and terms
+              </td>
+            </tr>
+
+
+          </tbody>
+        </table>
+        
+      
+        <!--[if (gte mso 9)|(IE)]>
+            </td>
+          </tr>
+        </table>
+        <![endif]--> 
+      
+
+      <!-- END CONTENT -->
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- END WRAPPER -->
+
+
+
+
+<!-- 
+
+    OLD TUESDAY NEWSDAY TEMPLATE
+    OLD TUESDAY NEWSDAY TEMPLATE
+    OLD TUESDAY NEWSDAY TEMPLATE
+
+ -->
+
+
 
       <!-- Email banner image -->
       <tr>
