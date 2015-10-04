@@ -31,21 +31,19 @@
   
   <!-- Section: campus messages -->
   <group identifier="messages-section" label="Campus messages">
-    <group identifier="item" label="Item" multiple="true">
       <text identifier="header" label="Item header"/>
       <asset type="page" identifier="header-link" label="Page for header link"/>
       <text identifier="header-url" label="Or paste a URL for the header link"/>
-      <group identifier="article-links" label="News article links" multiple="true" collapsed="true">
+      <group identifier="message" label="Message" multiple="true" collapsed="true">
         <asset type="page" identifier="page" label="Select a news article" render-content-depth="4" help-text="Shows a linked title only"/>
         <text identifier="url" label="Or paste a URL"/>
         <text identifier="headline" label="Custom headline"/>
       </group>
       <text wysiwyg="true" identifier="html" label="Or add custom content" wysiwyg-toolbar-remove="font formatting,font assignment,insert table,"/>
-    </group>
   </group>
 
   <!-- SECTION: In the News links -->
-  <group identifier="links-section" label="News links" multiple="true">
+  <group identifier="links-section" label="News links" multiple="false">
     <text identifier="header" label="Section header"/>
     <asset type="page" identifier="header-link" label="Page for header link"/>
     <text identifier="header-url" label="Or paste a URL"/>

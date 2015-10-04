@@ -125,72 +125,24 @@
               </td>
             </tr>
 
-            
-            <!-- SECTION: campus messages -->
+            <!-- Section: campus messages -->
             <tr>
-              <td align="left" valign="middle" bgcolor="#00458c" style="color:#fff;">
-                <h2 class="section-header">Head's up</h2>
+              <td>                
+                  <xsl:apply-templates select="system-data-structure/messages-section"/>
               </td>
             </tr>
 
+            <!-- Section: news links -->
             <tr>
-              <td align="left">              
-                <ul>
-                  <li class="item-headline--reduced">
-                    <a href="#">TITLE</a>
-                  </li>
-                </ul>
+              <td>                
+                  <xsl:apply-templates select="system-data-structure/links-section"/>
               </td>
             </tr>
-            <!-- END LIST -->
             
 
+         
 
 
-
-            <!-- SECTION: News links -->
-            <tr>
-              <td align="left" valign="middle" bgcolor="#00458c">
-                <h2 class="section-header">In the news</h2>
-              </td>
-            </tr>
-
-            
-            <tr>
-              <td align="left">
-
-                <!-- ITEM -->                
-                <table cellpadding="0" cellspacing="0" border="0" width="556">
-                  <tbody>
-                    <tr>
-                      <td>
-
-                        <!-- ITEM: Thumbnail -->
-                        <table cellpadding="0" cellspacing="0" border="0" align="left" width="60" height="60">
-                          <tr>
-                            <td>
-                              <img src="https://placehold.it/60x60" width="60" height="60" alt="#"/>
-                            </td>
-                          </tr>
-                        </table>
-                        
-                        <!-- ITEM: Meta -->
-                        <p style="margin:0; padding: 0; font-size:.75em;">Source - Date</p>
-                      
-                        <!-- ITEM: Headline -->
-                        <h3 class="item-headline--reduced" style="margin-top: 0; padding-top: 0;">
-                          <a href="#">--Headline--</a>
-                        </h3>
-
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>                
-                <!-- END ITEM --> 
-
-              </td>
-            </tr>
-            <!-- END In the News section -->
 
 
             <!-- BOTTOM ROW -->
@@ -271,6 +223,7 @@
 <!-- END WRAPPER -->
 
 </xsl:template>
+
 
 
 
@@ -384,12 +337,9 @@
 </xsl:template>
 
 
-
-
-
-<!-- 
-  SECTIONS
--->
+  <!-- 
+    SECTIONS
+  -->
   <xsl:template match="system-data-structure/articles-section">
  
   <!-- Print header and link -->
@@ -420,12 +370,11 @@
 
   </xsl:if>  
 
+  
+  <xsl:for-each select="article">
 
     <tr>
       <td class="item">        
-        <table border="0" cellpadding="0" cellspacing="0" id="content" width="97%">              
-
-    <xsl:for-each select="article">
 
       <xsl:variable name="article-title">
         <xsl:choose>
@@ -455,65 +404,138 @@
         </xsl:choose>
       </xsl:variable>
 
+      <table border="0" cellpadding="0" cellspacing="0">              
         <tr>
-          <td align="center" valign="top" width="30%">
+          <td align="center" valign="top" width="30%" class="item-image">
             <a href="{$article-link}{$tracking-vars}">
                 <img alt="{$article-title}" src="{$article-image}" width="250"/>
             </a>
           </td>
-          <td valign="top" width="70%">
+          <td valign="top" width="70%" class="item-copy">
             <h3 class="item-headline">
                 <a href="{$article-link}{$tracking-vars}"><strong><xsl:value-of select="$article-title"/></strong></a>
             </h3>
             <p class="item-description"><xsl:value-of select="$article-description"/></p>
           </td>
         </tr>
-    
-    </xsl:for-each>
-
-    </table>
+      </table>
+   
    </td>
   </tr>
+  
+  </xsl:for-each>
 
   </xsl:template>
 
 
 
   <!-- 
-      NEWS LINKS SECTION
+      CAMPUS MESSAGES 
   -->
-  <xsl:template match="system-data-structure/links-section">
-
+  <xsl:template match="system-data-structure/messages-section">
+ 
   <!-- Print header and link -->
   <xsl:if test="header != ''">
 
     <!-- Grab page title -->
-    <xsl:variable name="text-header">
+    <xsl:variable name="header-text">
       <xsl:value-of select="header"/>
     </xsl:variable>
 
     <tr>
-      <td bgcolor="#FDC83B" width="32%">&#160;</td>
-      <td bgcolor="#FDC83B" width="68%">
-      <h2>                  
+      <td align="left" valign="middle" bgcolor="#00458c" style="color:#fff;" class="section-header">
+      <h2>
         <xsl:choose>
           <xsl:when test="header-link/link != '/'">
-            <a href="{header-link/link}{$tracking-vars}"><xsl:value-of select="$text-header"/></a>
+            <a href="{header-link/link}{$tracking-vars}"><xsl:value-of select="$header-text"/></a>
           </xsl:when>
           <xsl:when test="header-url != ''">
-            <a href="{header-url}{$tracking-vars}"><xsl:value-of select="$text-header"/></a>
+            <a href="{header-url}{$tracking-vars}"><xsl:value-of select="$header-text"/></a>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="$text-header"/>
+            <xsl:value-of select="$header-text"/>
           </xsl:otherwise>
         </xsl:choose>                  
       </h2>
       </td>
     </tr>
+
   </xsl:if>  
+
+    <xsl:for-each select="message">
+
+    <tr>
+      <td class="item">        
+              
+      <xsl:variable name="message-title">
+        <xsl:choose>
+          <xsl:when test="headline != ''"><xsl:value-of select="headline"/></xsl:when>
+          <xsl:otherwise><xsl:value-of select="page/title"/></xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+
+      <xsl:variable name="message-link">
+        <xsl:choose>
+          <xsl:when test="url != ''"><xsl:value-of select="url"/></xsl:when>
+          <xsl:otherwise><xsl:value-of select="page/link"/></xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>    
+
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td valign="top" class="item-copy">
+          <h3 class="item-headline">
+              <a href="{$message-link}{$tracking-vars}"><strong><xsl:value-of select="$message-title"/></strong></a>
+          </h3>
+        </td>
+      </tr>
+    </table>
+     
+     </td>
+    </tr>
+    
+    </xsl:for-each>
+
+  </xsl:template>
+
+
+
+
+  <!-- 
+    NEWS LINKS SECTION
+  -->
+  <xsl:template match="system-data-structure/links-section">
+              
+  <!-- Print header and link -->
+  <xsl:if test="header != ''">
+
+    <!-- Grab page title -->
+    <xsl:variable name="header-text">
+      <xsl:value-of select="header"/>
+    </xsl:variable>
+
+    <tr>
+      <td align="left" valign="middle" bgcolor="#00458c" style="color:#fff;" class="section-header">
+      <h2>
+        <xsl:choose>
+          <xsl:when test="header-link/link != '/'">
+            <a href="{header-link/link}{$tracking-vars}"><xsl:value-of select="$header-text"/></a>
+          </xsl:when>
+          <xsl:when test="header-url != ''">
+            <a href="{header-url}{$tracking-vars}"><xsl:value-of select="$header-text"/></a>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="$header-text"/>
+          </xsl:otherwise>
+        </xsl:choose>                  
+      </h2>
+      </td>
+    </tr>
+
+  </xsl:if>   
   
     <tr>
-      <td colspan="2">      
+      <td>      
         <table border="0" cellpadding="0" cellspacing="0" id="content" width="97%">
 
     <!-- If there are articles -->
@@ -559,24 +581,18 @@
       </xsl:variable>          
                                      
         <tr>
-          <td align="center" valign="top" width="30%">
-              <xsl:if test="position() = last()">
-                <xsl:attribute name="id">last</xsl:attribute>
-              </xsl:if>                
-              <a data-link-uuid="{$link-uuid}" href="{$link-url}">
-                <img align="top" alt="{$link-source}" border="0" height="60" src="{$link-thumbnail}" width="60"/>
-              </a>
+          <td align="center" valign="top" width="20%">            
+            <a data-link-uuid="{$link-uuid}" href="{$link-url}">
+              <img align="top" alt="{$link-source}" border="0" height="60" src="{$link-thumbnail}" width="60"/>
+            </a>
            </td>
-          <td valign="top" width="70%">
-              <xsl:if test="position() = last()">
-                <xsl:attribute name="id">last</xsl:attribute>
-              </xsl:if>                
-              <p>
-                  <span class="xsmall">
-                      <xsl:value-of select="$link-source"/> - <xsl:value-of select="$link-date"/>
-                  </span><br/>
-                  <a data-link-uuid="{$link-uuid}" href="{$link-url}"><strong><xsl:value-of select="$link-title"/></strong></a>
-              </p>
+          <td valign="top" width="80%">
+            <p>
+                <span class="xsmall">
+                    <xsl:value-of select="$link-source"/> - <xsl:value-of select="$link-date"/>
+                </span><br/>
+                <a data-link-uuid="{$link-uuid}" href="{$link-url}"><strong><xsl:value-of select="$link-title"/></strong></a>
+            </p>
           </td>
         </tr>
       

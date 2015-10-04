@@ -71,9 +71,28 @@ h3 {
   text-transform: uppercase;
 }
 
+.email-info h1 {
+  margin: 0 0 0.15em 0;
+  padding: 0;
+}
+
 .meta {
   font-size: 12px;
 }
+
+.item {
+  padding-bottom: 1em;
+}
+
+.item-headline {
+  margin-top: 0;
+}
+
+.item-copy {
+  padding: 0.25em 0.25em 0.25em 0.5em;
+}
+
+
 
 table [class=header-tn] {
   width:100%;
