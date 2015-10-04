@@ -51,12 +51,12 @@
     <xsl:template match="system-page">
 
     <!-- PRE-HEADER -->
-    <table border="0" cellpadding="0" cellspacing="0" width="600" class="preheader" summary="Links to the web version of this page and the archive of past issues.">
+    <table border="0" cellpadding="0" cellspacing="0" width="600" summary="Links to the web version of this page and the archive of past issues.">
       <tbody>
       <tr>
         <td align="center">
-          <p class="url-link">View as a web page: <a href="{$page-url}{$tracking-vars}"><xsl:value-of select="$page-url"/></a><br/>
-          You can always find back issues at <a href="http://news.ucsc.edu/tuesday-newsday/{$tracking-vars}"> http://news.ucsc.edu/tuesday-newsday/</a></p>
+          <p class="preheader">View as a web page: <a href="{$page-url}{$tracking-vars}"><xsl:value-of select="$page-url"/></a><br/>
+          Find previous issues at <a href="http://news.ucsc.edu/tuesday-newsday/{$tracking-vars}"> http://news.ucsc.edu/tuesday-newsday/</a></p>
         </td>
       </tr>
       </tbody>
@@ -108,7 +108,10 @@
 
               </td>
             </tr>
-            
+
+            <!-- Editor's note -->
+            <xsl:apply-templates select="system-data-structure/editors-note"/>
+
             <!-- Feature story photo -->
             <xsl:if test="system-data-structure/feature-section/banner/path != '/'">
             <tr>
@@ -139,11 +142,6 @@
               </td>
             </tr>
             
-
-         
-
-
-
 
             <!-- BOTTOM ROW -->
             <tr>
@@ -277,7 +275,7 @@
       </tr>
 
       <tr>
-        <td>
+        <td class="item">
           <h2><a href="{$feature-link}{$tracking-vars}"><xsl:value-of select="$feature-title"/></a></h2>
           <p><xsl:value-of select="$feature-description"/></p>
         </td>
@@ -312,23 +310,16 @@
 <xsl:template match="editors-note">
 
   <xsl:if test="node() != ''">
-            
-    <!-- Content for editor's note -->
-     <tr>
-      <td colspan="2">
-        <table border="0" cellpadding="0" cellspacing="0" class="email-editors-note" id="content" width="97%"> 
-          <!-- Editor's note header -->
-          <tr>
-            <td colspan="2" id="last">
-                <h2>Editor's note</h2>
-            </td>
-          </tr>
-          <tr>
-            <td id="last">
-              <xsl:copy-of select="node()"/>
-            </td>
-          </tr>
-        </table>
+           
+    <!-- Editor's note header -->
+    <tr>
+      <td>
+          <h2>Editor's note</h2>
+      </td>
+    </tr>
+    <tr>
+      <td id="last">
+        <xsl:copy-of select="node()"/>
       </td>
     </tr>
 
@@ -462,11 +453,12 @@
 
   </xsl:if>  
 
-    <xsl:for-each select="message">
+  <tr>
+    <td>
+      <ul class="message-list">
 
-    <tr>
-      <td class="item">        
-              
+    <xsl:for-each select="message">
+             
       <xsl:variable name="message-title">
         <xsl:choose>
           <xsl:when test="headline != ''"><xsl:value-of select="headline"/></xsl:when>
@@ -481,20 +473,18 @@
         </xsl:choose>
       </xsl:variable>    
 
-      <table border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td valign="top" class="item-copy">
-          <h3 class="item-headline">
-              <a href="{$message-link}{$tracking-vars}"><strong><xsl:value-of select="$message-title"/></strong></a>
-          </h3>
-        </td>
-      </tr>
-    </table>
+
+      <li>
+        <a href="{$message-link}{$tracking-vars}"><strong><xsl:value-of select="$message-title"/></strong></a>
+      </li>
+
      
-     </td>
-    </tr>
     
     </xsl:for-each>
+
+      </ul>
+     </td>
+    </tr>
 
   </xsl:template>
 

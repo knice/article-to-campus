@@ -56,8 +56,16 @@
     </group>
   </group>
   
+  <!-- Bottom columns -->
+  <group identifier="bottom-section" label="Bottom columns" multiple="false">
+      <group identifier="column" label="Column" multiple="true" maximum-number="2">
+        <text identifier="header" label="Column header"/>
+        <asset type="block" identifier="column-block" label="Block for column content" render-content-depth="3"/>
+        <text wysiwyg="true" identifier="html" label="Or add custom content" wysiwyg-toolbar-remove="font formatting,font assignment,insert table,"/>
+      </group>
+   </group>
+
   <text wysiwyg="true" identifier="editors-note" label="Editor's note" help-text="Shows just above news articles" wysiwyg-toolbar-remove="font formatting,font assignment,insert table,"/>
-  <text wysiwyg="true" identifier="highlight" label="Highlight area" help-text="Appears directly under the banner image." wysiwyg-toolbar-remove="font formatting,font assignment,insert table,"/>
   <asset type="block" identifier="footer-block" label="Block for footer content" render-content-depth="3"/>
   <text wysiwyg="true" identifier="footer-text" label="Footer text" help-text="Appears as small text below the footer."/>
 </system-data-structure>
