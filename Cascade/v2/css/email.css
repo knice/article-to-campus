@@ -32,9 +32,10 @@ p {
 }
 h1, h2, h3, h4 {
   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   margin: 1em 0 .25em 0;
 }
+
 h1 {
   font-size: 40px;/*margin-bottom: 0;*/
   margin:0; 
@@ -50,13 +51,30 @@ h3 {
   font-size: 18px;
   line-height:1.2em;
 }
-table [class=content] {
+
+.section-header h2,
+.section-header h2 a {
+  margin: 0.25em;
+  color:#fff;
+  text-transform: uppercase;
+}
+
+#content {
   width:100%;
   max-width: 600px;
   background: #f2f6f9;
   margin: 0 auto;
   padding: 0;
 }
+
+.email-info {
+  text-transform: uppercase;
+}
+
+.meta {
+  font-size: 12px;
+}
+
 table [class=header-tn] {
   width:100%;
   max-width:445px;
