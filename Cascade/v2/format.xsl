@@ -143,38 +143,16 @@
             </tr>
             
 
-            <!-- BOTTOM ROW -->
+            <!-- Section: promotional columns -->
             <tr>
-              <td align="left" style="padding: 1em 1em 0 1em ">
-
-                <!-- SUB-SECTION -->
-                <table width="268" border="0" cellspacing="0" cellpadding="0" align="left" style="margin-right:1em;">
-                  
-                  <!-- SUB-SECTION HEADER -->
-                  <tr>
-                    <td align="left" valign="middle" bgcolor="#f1b521">
-                      <h2 class="section-header--gold">Events Calendar</h2>
-                    </td>
-                  </tr>
-                  
-                  <!-- SUB-SECTION CONTENT -->
-                  <tr>
-                    <td align="left" valign="middle">
-                      Content... RSS from calendar?                      
-                    </td>
-                  </tr>
-
-                </table>
-                <!-- END SUB-SECTION -->
-
+              <td>
+                 <xsl:apply-templates select="system-data-structure/bottom-section"/>
               </td>
             </tr>
             <!-- END BOTTOM ROW -->
 
             <tr>
               <td align="left" bgcolor="#00458c" valign="center">
-
-                <img src="https://placehold.it/52x49" alt="UC Santa Cruz Campaign Thumb" width="52" height="49" align="left"/>
 
                 <table cellpadding="0" cellspacing="0" border="0" align="left" height="49">
                   <tbody>
@@ -285,20 +263,44 @@
 
 
 <!-- 
-    HIGHLIGHT AREA
+    BOTTOM COLUMNS
 -->
-<xsl:template match="highlight">
+<xsl:template match="bottom-section">
 
-  <xsl:if test="node() != ''">
+
+    <xsl:for-each select="column">
+      
+          
+        <xsl:if test="html/node() != ''">            
+
+          <!-- SUB-SECTION -->
+          <table width="50%" border="0" cellspacing="0" cellpadding="0">
             
-    <!-- Content for highlight area -->
-     <tr>
-      <td class="highlight" colspan="2">
-        <xsl:copy-of select="node()"/>
-      </td>
-    </tr>
+            <xsl:if test="header != ''">
+              <!-- SUB-SECTION HEADER -->
+              <tr>
+                <td align="left" valign="middle" bgcolor="#f1b521" class="section-header--gold">
+                  <h2><xsl:value-of select="header"/></h2>
+                </td>
+              </tr>
 
-  </xsl:if>
+            </xsl:if>
+            
+            <!-- SUB-SECTION CONTENT -->
+              <!-- Content for highlight area -->
+               <tr>
+                <td class="item">
+                  <xsl:copy-of select="html/node()"/>
+                </td>
+              </tr>
+
+          </table>
+          <!-- END SUB-SECTION -->
+        
+        </xsl:if>
+      
+    </xsl:for-each>
+
 
 </xsl:template>
 
