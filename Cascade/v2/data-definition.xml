@@ -24,8 +24,9 @@
       <asset type="page" identifier="page" label="Select a news article" render-content-depth="4" help-text="Will use the headline, summary and thumbnail"/>
       <text identifier="url" label="Or paste a URL"/>
       <text identifier="headline" label="Custom headline"/>
+      <text identifier="subhead" label="Custom sub-headline"/>
       <text multi-line="true" identifier="description" label="Custom description text"/>
-      <asset type="file" identifier="thumbnail" label="Custom 500px image"/>
+      <asset type="file" identifier="thumbnail" label="Custom 250px image"/>
     </group>
   </group>
   

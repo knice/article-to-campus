@@ -66,13 +66,8 @@
       
     
 
-<!-- CONTENT WRAPPER -->
-<table class="wrap" cellpadding="0" cellspacing="0" border="0" summary="Main content for this issue.">
-  <tbody>
-    <tr>
-      <td align="center">
-     
-      <!-- CONTENT --> 
+<!-- CONTENT -->
+
         
         <!--[if (gte mso 9)|(IE)]>
           <table width="600" align="center">
@@ -80,7 +75,7 @@
               <td>
         <![endif]-->
         
-        <table border="0" align="center" cellpadding="0" cellspacing="0" id="content" width="600">
+        <table border="0" align="center" cellpadding="0" cellspacing="0" class="content" width="600">
           <tbody>
             
             <tr>
@@ -149,40 +144,23 @@
                  <xsl:apply-templates select="system-data-structure/bottom-section"/>
               </td>
             </tr>
-            <!-- END BOTTOM ROW -->
 
+
+            <!-- Section: Footer text -->
             <tr>
-              <td align="left" bgcolor="#00458c" valign="center">
-
-                <table cellpadding="0" cellspacing="0" border="0" align="left" height="49">
-                  <tbody>
-                    <tr>
-                      <td style="color:#fff; font-size: 12px; line-height: 15px; vertical-align:middle;" valign="middle"> Tuesday Newsday is brought to you by your friends in University Relations.<br />
-                        Thank you for making us proud. <a href="#" style="color:#f1b521">Feedback</a></td>
-                    </tr>
-                  </tbody>
-                </table>
-              
+              <td bgcolor="#00458c" valign="center">
+                <xsl:apply-templates select="system-data-structure/footer-block"/>              
               </td>
             </tr>
-
-            <tr>
-              <td align="center">
-                Association clause: you get this because...
-              </td>
-            </tr>
-
-            <tr>
-              <td align="center">
-                Privacy policy and terms
-              </td>
-            </tr>
-
 
           </tbody>
         </table>
         
-      
+        
+        <!-- Post-table text (privacy policy and terms) -->
+        <xsl:apply-templates select="system-data-structure/footer-text"/>      
+
+
         <!--[if (gte mso 9)|(IE)]>
             </td>
           </tr>
@@ -190,13 +168,7 @@
         <![endif]--> 
       
 
-      <!-- END CONTENT -->
-
-      </td>
-    </tr>
-  </tbody>
-</table>
-<!-- END WRAPPER -->
+<!-- END CONTENT -->
 
 </xsl:template>
 
@@ -267,19 +239,22 @@
 -->
 <xsl:template match="bottom-section">
 
+<table>
+  <tr>
 
     <xsl:for-each select="column">
       
+      <td width="50%" valign="top" class="bottom-columns">
           
         <xsl:if test="html/node() != ''">            
 
           <!-- SUB-SECTION -->
-          <table width="50%" border="0" cellspacing="0" cellpadding="0">
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
             
             <xsl:if test="header != ''">
               <!-- SUB-SECTION HEADER -->
               <tr>
-                <td align="left" valign="middle" bgcolor="#f1b521" class="section-header--gold">
+                <td width="100%" valign="middle" bgcolor="#f1b521" color="#ffffff" class="section-header--gold">
                   <h2><xsl:value-of select="header"/></h2>
                 </td>
               </tr>
@@ -289,7 +264,7 @@
             <!-- SUB-SECTION CONTENT -->
               <!-- Content for highlight area -->
                <tr>
-                <td class="item">
+                <td valign="top">
                   <xsl:copy-of select="html/node()"/>
                 </td>
               </tr>
@@ -298,8 +273,13 @@
           <!-- END SUB-SECTION -->
         
         </xsl:if>
+
+      </td>
       
     </xsl:for-each>
+
+</tr>
+</table>
 
 
 </xsl:template>
@@ -312,18 +292,23 @@
 <xsl:template match="editors-note">
 
   <xsl:if test="node() != ''">
-           
-    <!-- Editor's note header -->
+               
     <tr>
       <td>
-          <h2>Editor's note</h2>
+        <table cellpadding="0" cellspacing="0" border="0" summary="Editor's note" class="editors-note">
+          <tr>
+            <td>
+                <h2>Editor's note</h2>
+            </td>
+          </tr>
+          <tr>
+            <td id="last">
+              <xsl:copy-of select="node()"/>
+            </td>
+          </tr>
+        </table>      
       </td>
-    </tr>
-    <tr>
-      <td id="last">
-        <xsl:copy-of select="node()"/>
-      </td>
-    </tr>
+    </tr>         
 
   </xsl:if>
 
@@ -597,116 +582,6 @@
 </xsl:template>
 
 
-<!--
-    SIDEBAR SECTION
--->
-<xsl:template match="system-data-structure/sidebar-section">
-
-  <table border="0" cellpadding="0" cellspacing="0" id="right" width="90%">
-
-    <xsl:for-each select="item">
-
-    <!-- Print header and link -->
-    <xsl:if test="header != ''">
-
-      <!-- Grab page title -->
-      <xsl:variable name="text-header">
-        <xsl:value-of select="header"/>
-      </xsl:variable>
-
-      <tr>
-        <td class="border-bottom" valign="top">
-        <h2>                  
-          <xsl:choose>
-            <xsl:when test="header-link/link != '/'">
-              <a href="{header-link/link}{$tracking-vars}"><xsl:value-of select="$text-header"/></a>
-            </xsl:when>
-            <xsl:when test="header-url != ''">
-              <a href="{header-url}"><xsl:value-of select="$text-header"/></a>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="$text-header"/>
-            </xsl:otherwise>
-          </xsl:choose>                  
-        </h2>
-        </td>
-      </tr>
-    </xsl:if> 
-    
-    <tr class="sidebar-content">
-      <td valign="top">
-
-        <!-- Image header: links to header link if present -->
-        <xsl:if test="image/path != '/'">
-          <xsl:choose>
-            <xsl:when test="header-link/link != '/'">
-              <a href="{header-link/link}{$tracking-vars}">
-                <img alt="{image/name}" src="{image/link}"/>
-              </a>
-            </xsl:when>
-            <xsl:when test="header-url != ''">
-              <a href="{header-url}">
-                <img alt="{image/name}" src="{image/link}"/>
-              </a>
-            </xsl:when>
-            <xsl:otherwise>
-              <img alt="{image/name}" src="{image/link}"/>
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:if>
-
-        <xsl:for-each select="article-links">
-          <xsl:if test="page/path !='/' or url != ''">
-            
-            <xsl:variable name="headline-text">
-            <xsl:choose>
-                <xsl:when test="headline != ''">
-                  <xsl:value-of select="headline"/>
-                </xsl:when>
-                <xsl:when test="page/title != ''">
-                  <xsl:value-of select="page/title"/>
-                </xsl:when>                    
-                <xsl:otherwise>
-                  [system-view:internal]NO HEADLINE SET[/system-view:internal]
-                </xsl:otherwise>
-            </xsl:choose>
-            </xsl:variable>
-
-            <xsl:variable name="url-text">
-            <xsl:choose>
-                <xsl:when test="url != ''">
-                  <xsl:value-of select="url"/>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="concat(page/link, $tracking-vars)"/>
-                </xsl:otherwise>
-            </xsl:choose>
-            </xsl:variable>                
-            
-          <p>
-            <strong>
-              <a href="{$url-text}"><xsl:value-of select="$headline-text"/></a>
-            </strong>
-          </p>
-        
-          </xsl:if>
-        
-        </xsl:for-each>
-
-        <xsl:if test="html/node() !=''">
-        <div>
-          <xsl:copy-of select="html/node()"/>
-        </div>
-        </xsl:if>
-      </td>
-    </tr>          
-
-    </xsl:for-each>
-
-  </table>  
-
-</xsl:template>
-
 
 <!--
     FOOTER ROW BLOCK
@@ -715,10 +590,8 @@
 
   <xsl:if test="path !='/'">
   <tr>
-    <td bgcolor="#01458c" colspan="2">
-   
+    <td bgcolor="#01458c">   
       <xsl:copy-of select="content/system-data-structure/content/node()"/>
-
     </td>
   </tr>
   </xsl:if>
