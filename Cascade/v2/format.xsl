@@ -75,7 +75,7 @@
               <td>
         <![endif]-->
         
-        <table border="0" align="center" cellpadding="0" cellspacing="0" class="content" width="600">
+        <table border="0" align="center" cellpadding="0" cellspacing="0" width="600">
           <tbody>
             
             <tr>
@@ -109,56 +109,31 @@
 
             <!-- Feature story photo -->
             <xsl:if test="system-data-structure/feature-section/banner/path != '/'">
-            <tr>
-              <td>                
                 <xsl:apply-templates select="system-data-structure/feature-section"/>
-              </td>
-            </tr>
             </xsl:if>
 
-            <!-- Sections: keynotes, profiles, or news -->
-            <tr>
-              <td>                
-                  <xsl:apply-templates select="system-data-structure/articles-section"/>
-              </td>
-            </tr>
+            <!-- Sections: keynotes, profiles, or news -->                
+            <xsl:apply-templates select="system-data-structure/articles-section"/>
 
             <!-- Section: campus messages -->
-            <tr>
-              <td>                
-                  <xsl:apply-templates select="system-data-structure/messages-section"/>
-              </td>
-            </tr>
+            <xsl:apply-templates select="system-data-structure/messages-section"/>
 
             <!-- Section: news links -->
-            <tr>
-              <td>                
-                  <xsl:apply-templates select="system-data-structure/links-section"/>
-              </td>
-            </tr>
-            
+            <xsl:apply-templates select="system-data-structure/links-section"/>
 
             <!-- Section: promotional columns -->
-            <tr>
-              <td>
-                 <xsl:apply-templates select="system-data-structure/bottom-section"/>
-              </td>
-            </tr>
-
+            <xsl:apply-templates select="system-data-structure/bottom-section"/>
 
             <!-- Section: Footer text -->
-            <tr>
-              <td bgcolor="#00458c" valign="center">
-                <xsl:apply-templates select="system-data-structure/footer-block"/>              
-              </td>
-            </tr>
+            <xsl:apply-templates select="system-data-structure/footer-block"/>              
+
 
           </tbody>
         </table>
         
         
-        <!-- Post-table text (privacy policy and terms) -->
-        <xsl:apply-templates select="system-data-structure/footer-text"/>      
+            <!-- Post-table text (privacy policy and terms) -->
+            <xsl:apply-templates select="system-data-structure/footer-text"/>      
 
 
         <!--[if (gte mso 9)|(IE)]>
@@ -217,15 +192,15 @@
       </xsl:variable>
 
       <tr>
-        <td>              
+        <td bgcolor="#f2f6f9">              
           <a href="{$feature-link}{$tracking-vars}">
-              <img alt="{$feature-banner-alt}" src="{$feature-banner}" width="600"/>
+              <img alt="{$feature-banner-alt}" src="{$feature-banner}" width="100%"/>
           </a>
         </td>
       </tr>
 
       <tr>
-        <td class="item">
+        <td class="item" bgcolor="#f2f6f9">
           <h2><a href="{$feature-link}{$tracking-vars}"><xsl:value-of select="$feature-title"/></a></h2>
           <p><xsl:value-of select="$feature-description"/></p>
         </td>
@@ -239,48 +214,54 @@
 -->
 <xsl:template match="bottom-section">
 
-<table>
-  <tr>
+<tr bgcolor="#f2f6f9">
+  <td>
+    
 
-    <xsl:for-each select="column">
-      
-      <td width="50%" valign="top" class="bottom-columns">
+    <table cellspacing="0" cellpadding="6" border="0">
+      <tr>
+
+        <xsl:for-each select="column">
           
-        <xsl:if test="html/node() != ''">            
+          <td width="50%" valign="top" class="bottom-columns">
+              
+            <xsl:if test="html/node() != ''">            
 
-          <!-- SUB-SECTION -->
-          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <!-- SUB-SECTION -->
+              <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                
+                <xsl:if test="header != ''">
+                  <!-- SUB-SECTION HEADER -->
+                  <tr>
+                    <td width="100%" valign="middle" bgcolor="#f1b521" color="#ffffff" class="section-header">
+                      <h2 class="gold"><xsl:value-of select="header"/></h2>
+                    </td>
+                  </tr>
+
+                </xsl:if>
+                
+                <!-- SUB-SECTION CONTENT -->
+                  <!-- Content for highlight area -->
+                   <tr>
+                    <td valign="top">
+                      <xsl:copy-of select="html/node()"/>
+                    </td>
+                  </tr>
+
+              </table>
+              <!-- END SUB-SECTION -->
             
-            <xsl:if test="header != ''">
-              <!-- SUB-SECTION HEADER -->
-              <tr>
-                <td width="100%" valign="middle" bgcolor="#f1b521" color="#ffffff" class="section-header--gold">
-                  <h2><xsl:value-of select="header"/></h2>
-                </td>
-              </tr>
-
             </xsl:if>
-            
-            <!-- SUB-SECTION CONTENT -->
-              <!-- Content for highlight area -->
-               <tr>
-                <td valign="top">
-                  <xsl:copy-of select="html/node()"/>
-                </td>
-              </tr>
 
-          </table>
-          <!-- END SUB-SECTION -->
-        
-        </xsl:if>
+          </td>
+          
+        </xsl:for-each>
 
-      </td>
-      
-    </xsl:for-each>
+      </tr>
+    </table>
 
+  </td>
 </tr>
-</table>
-
 
 </xsl:template>
 
@@ -295,18 +276,21 @@
                
     <tr>
       <td>
+
         <table cellpadding="0" cellspacing="0" border="0" summary="Editor's note" class="editors-note">
           <tr>
             <td>
                 <h2>Editor's note</h2>
             </td>
           </tr>
+        
           <tr>
-            <td id="last">
+            <td>
               <xsl:copy-of select="node()"/>
             </td>
           </tr>
         </table>      
+
       </td>
     </tr>         
 
@@ -351,7 +335,7 @@
   
   <xsl:for-each select="article">
 
-    <tr>
+    <tr bgcolor="#f2f6f9">
       <td class="item">        
 
       <xsl:variable name="article-title">
@@ -420,7 +404,7 @@
       <xsl:value-of select="header"/>
     </xsl:variable>
 
-    <tr>
+    <tr bgcolor="#f2f6f9">
       <td align="left" valign="middle" bgcolor="#00458c" style="color:#fff;" class="section-header">
       <h2>
         <xsl:choose>
@@ -440,7 +424,7 @@
 
   </xsl:if>  
 
-  <tr>
+  <tr bgcolor="#f2f6f9">
     <td>
       <ul class="message-list">
 
@@ -511,9 +495,9 @@
 
   </xsl:if>   
   
-    <tr>
+    <tr bgcolor="#f2f6f9">
       <td>      
-        <table border="0" cellpadding="0" cellspacing="0" id="content" width="97%">
+        <table border="0" cellpadding="0" cellspacing="0" summary="Links to popular news stories about UC Santa Cruz">
 
     <!-- If there are articles -->
     <xsl:for-each select="link">
@@ -558,12 +542,12 @@
       </xsl:variable>          
                                      
         <tr>
-          <td align="center" valign="top" width="20%">            
+          <td align="center" valign="top" width="12%">            
             <a data-link-uuid="{$link-uuid}" href="{$link-url}">
               <img align="top" alt="{$link-source}" border="0" height="60" src="{$link-thumbnail}" width="60"/>
             </a>
            </td>
-          <td valign="top" width="80%">
+          <td valign="top" width="88%">
             <p>
                 <span class="xsmall">
                     <xsl:value-of select="$link-source"/> - <xsl:value-of select="$link-date"/>
@@ -589,11 +573,11 @@
 <xsl:template match="footer-block">
 
   <xsl:if test="path !='/'">
-  <tr>
-    <td bgcolor="#01458c">   
-      <xsl:copy-of select="content/system-data-structure/content/node()"/>
-    </td>
-  </tr>
+    <tr bgcolor="#01458c">
+      <td>   
+        <xsl:copy-of select="content/system-data-structure/content/node()"/>
+      </td>
+    </tr>
   </xsl:if>
 
 </xsl:template>
