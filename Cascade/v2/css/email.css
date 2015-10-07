@@ -9,16 +9,22 @@ body, table[class="wrap"] {
 table {
   border-spacing: 0;
   border-collapse: collapse;
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+.main-content {
+  margin-top: 0.75em;
+}
+
 img {
   display: block;
   height: auto;
 }
 p {
-  font-size: 15px;
-  font-weight: 300;
-  line-height:1.4em;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0 0 1em 0;
 }
 a, a:active {
   color: #00458c;
@@ -27,18 +33,17 @@ a, a:active {
 a:hover {
   text-decoration: underline;
 }
-p {
-  margin: 0 0 1em 0;
-}
+
 h1, h2, h3, h4 {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 400;
   margin: 1em 0 .25em 0;
 }
 
 h1 {
-  font-size: 40px;/*margin-bottom: 0;*/
-  margin:0; 
+  font-size: 38px;
+  /*margin-bottom: 0;*/
+  margin:0;
   padding-top: 15px;
   padding-left: 10px;
   line-height: .75em;
@@ -61,7 +66,7 @@ h3 {
 
 .section-header h2,
 .section-header h2 a {
-  margin: 0.25em;
+  margin: 0.3em 0.55em;
   color:#fff;
   text-transform: uppercase;
 }
@@ -75,19 +80,34 @@ h3 {
 
 .email-info {
   text-transform: uppercase;
+  padding-top: 12px;
+  padding-left: 14px;
 }
 
 .email-info h1 {
   margin: 0 0 0.15em 0;
   padding: 0;
+  line-height: 0.5;
+  font-size: 38px;
 }
 
 .meta {
   font-size: 12px;
 }
 
+
 .item {
-  padding:0 0.75em 1.5em 0.75em;
+  padding: 0 1.5em 1.5em 1.5em;
+}
+
+.feature-item {
+  padding: 1em 1.5em 0.5em 1.5em;
+}
+
+.feature-headline {
+  font-weight: 600;
+  font-size: 24px;
+  margin: 0.65em 0 0.25em;
 }
 
 .item-headline {
@@ -101,9 +121,56 @@ h3 {
 
 .message-list li {
   margin: 0.5em 0.5em 0.65em 0.25em;
-  font-size: 16px;
+  font-size: 18px;
 }
 
+.row {
+  padding:1em 0;
+}
+
+
+.editors-note {
+  background-color: #f2f6f9;
+  padding: 1em;
+  font-size: 14px;
+}
+
+.editors-note h2 {
+  margin: 0 0 0.25em 0;
+  color: #00458c;
+  font-weight: 600;
+}
+
+
+.news-links {
+  padding-left: 0.5em;
+}
+
+.news-links td {
+  padding: 0.5em 0 0.25em 0.75em;
+}
+
+.columns {
+  padding-bottom: 2.25em;
+}
+
+.column-content {
+  padding: 0.5em;
+}
+
+.footer {
+  border-top: 6px solid #00458c;
+  font-size: 11px;
+  padding: 2em;
+  text-align:center;
+  padding-bottom:0;
+  background-color: #ffffff;
+}
+
+.footer a {
+  color: #00458c;
+  text-decoration:underline;
+}
 
 
 table [class=header-tn] {
@@ -126,11 +193,11 @@ table [class=thumb] {
   max-width: 250px;
 }
 table td [class=spacing] {
-  padding-right:1em; 
+  padding-right:1em;
   padding-bottom: 2em;
 }
 table [class=teaser] {
-	width:100%;
+    width:100%;
 	max-width: 299px;
 }
 table [class="news-container"]{
@@ -143,7 +210,7 @@ table [class="news-icon"]{
   max-width:60px;
 }
 table td [class=icon-spacing] {
-  padding-right: 1em; 
+  padding-right: 1em;
   padding-bottom: 2em;
 }
 .icon {
@@ -162,8 +229,8 @@ table [class="yellow-box-right"]{
 }
 .header-date {
   display: block;
-  font-size:10px; 
-  padding-left:18px; 
+  font-size:10px;
+  padding-left:18px;
   margin: 0;
   text-align: left;
 }
