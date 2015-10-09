@@ -210,64 +210,6 @@
 
 
 <!--
-    BOTTOM COLUMNS
--->
-<xsl:template match="bottom-section">
-
-<tr bgcolor="#f2f6f9">
-  <td class="row columns">
-
-
-    <table cellspacing="0" cellpadding="8" border="0">
-      <tr>
-
-        <xsl:for-each select="column">
-
-          <td width="50%" valign="top" class="bottom-columns">
-
-            <xsl:if test="html/node() != ''">
-
-              <!-- SUB-SECTION -->
-              <table border="0" width="100%" cellspacing="0" cellpadding="0">
-
-                <xsl:if test="header != ''">
-                  <!-- SUB-SECTION HEADER -->
-                  <tr>
-                    <td width="100%" valign="middle" bgcolor="#f1b521" color="#ffffff" class="section-header">
-                      <h2 class="gold"><xsl:value-of select="header"/></h2>
-                    </td>
-                  </tr>
-
-                </xsl:if>
-
-                <!-- SUB-SECTION CONTENT -->
-                  <!-- Content for highlight area -->
-                   <tr>
-                    <td valign="top" class="column-content">
-                      <xsl:copy-of select="html/node()"/>
-                    </td>
-                  </tr>
-
-              </table>
-              <!-- END SUB-SECTION -->
-
-            </xsl:if>
-
-          </td>
-
-        </xsl:for-each>
-
-      </tr>
-    </table>
-
-  </td>
-</tr>
-
-</xsl:template>
-
-
-
-<!--
     EDITOR'S NOTE
 -->
 <xsl:template match="editors-note">
@@ -377,6 +319,9 @@
             <h3 class="item-headline">
                 <a href="{$article-link}{$tracking-vars}"><strong><xsl:value-of select="$article-title"/></strong></a>
             </h3>
+            <xsl:if test="subhead !=''">
+              <p class="item-subhead"><xsl:value-of select="subhead"/></p>
+            </xsl:if>
             <p class="item-description"><xsl:value-of select="$article-description"/></p>
           </td>
         </tr>
@@ -561,6 +506,69 @@
 </tr>
 
 </xsl:template>
+
+
+
+
+<!--
+    BOTTOM COLUMNS
+-->
+<xsl:template match="bottom-section">
+
+<tr bgcolor="#f2f6f9">
+  <td class="row columns">
+
+
+    <table cellspacing="0" cellpadding="8" border="0">
+      <tr>
+
+        <xsl:for-each select="column">
+
+          <td width="50%" valign="top" class="bottom-columns">
+
+            <xsl:if test="html/node() != ''">
+
+              <!-- SUB-SECTION -->
+              <table border="0" width="100%" cellspacing="0" cellpadding="0">
+
+                <xsl:if test="header != ''">
+                  <!-- SUB-SECTION HEADER -->
+                  <tr>
+                    <td width="100%" valign="middle" bgcolor="#f1b521" color="#ffffff" class="section-header">
+                      <h2 class="gold"><xsl:value-of select="header"/></h2>
+                    </td>
+                  </tr>
+
+                </xsl:if>
+
+                <!-- SUB-SECTION CONTENT -->
+                  <!-- Content for highlight area -->
+                   <tr>
+                    <td valign="top" class="column-content">
+                      <xsl:copy-of select="html/node()"/>
+                    </td>
+                  </tr>
+
+              </table>
+              <!-- END SUB-SECTION -->
+
+            </xsl:if>
+
+          </td>
+
+        </xsl:for-each>
+
+      </tr>
+    </table>
+
+  </td>
+</tr>
+
+</xsl:template>
+
+
+
+
 
 
 

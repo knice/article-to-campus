@@ -116,7 +116,15 @@ h3 {
 }
 
 .item-copy {
-  padding: 0.25em 0.25em 0.25em 0.75em;
+  padding: 0.75em 0.25em 0.25em 1em;
+}
+
+.item-subhead {
+  font-size: 16px;
+  margin-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #ddd;
+  color: #545454;
 }
 
 .message-list li {
