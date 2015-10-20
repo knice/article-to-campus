@@ -1,6 +1,7 @@
 {
-  "name": "ucsc-page-fetcher",
-  "version": "0.0.1",
+  "name": "ucsc-email",
+  "version": "2.1.0",
+  "repository": "https://github.com/knice/email",
   "description": "Fetch a web page and prepare it for email.",
   "main": "app.js",
   "scripts": {
