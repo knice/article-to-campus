@@ -55,15 +55,12 @@
       <tbody>
       <tr>
         <td align="center">
-          <p class="preheader">View as a web page: <a href="{$page-url}{$tracking-vars}"><xsl:value-of select="$page-url"/></a><br/>
-          Find previous issues at <a href="http://news.ucsc.edu/tuesday-newsday/{$tracking-vars}"> http://news.ucsc.edu/tuesday-newsday/</a></p>
+          <p class="preheader"><a href="{$page-url}{$tracking-vars}">View as a web page</a> | <a href="http://news.ucsc.edu/tuesday-newsday/{$tracking-vars}">Read previous issues</a></p>
         </td>
       </tr>
       </tbody>
     </table>
     <!-- END PRE-HEADER -->
-
-
 
 
 <!-- CONTENT -->
@@ -196,6 +193,7 @@
           <a href="{$feature-link}{$tracking-vars}">
               <img alt="{$feature-banner-alt}" src="{$feature-banner}" width="100%"/>
           </a>
+          <p class="feature-caption"><xsl:value-of select="$feature-banner-alt"/></p>
         </td>
       </tr>
 
@@ -402,8 +400,6 @@
   </xsl:template>
 
 
-
-
   <!--
     NEWS LINKS SECTION
   -->
@@ -515,54 +511,88 @@
 -->
 <xsl:template match="bottom-section">
 
-<tr bgcolor="#f2f6f9">
-  <td class="row columns">
+    <xsl:for-each select="column">
 
+      <!-- Print header and link -->
+      <xsl:if test="header != ''">
 
-    <table cellspacing="0" cellpadding="8" border="0">
-      <tr>
+        <!-- Grab page title -->
+        <xsl:variable name="header-text">
+          <xsl:value-of select="header"/>
+        </xsl:variable>
 
-        <xsl:for-each select="column">
-
-          <td width="50%" valign="top" class="bottom-columns">
-
-            <xsl:if test="html/node() != ''">
-
-              <!-- SUB-SECTION -->
-              <table border="0" width="100%" cellspacing="0" cellpadding="0">
-
-                <xsl:if test="header != ''">
-                  <!-- SUB-SECTION HEADER -->
-                  <tr>
-                    <td width="100%" valign="middle" bgcolor="#f1b521" color="#ffffff" class="section-header">
-                      <h2 class="gold"><xsl:value-of select="header"/></h2>
-                    </td>
-                  </tr>
-
-                </xsl:if>
-
-                <!-- SUB-SECTION CONTENT -->
-                  <!-- Content for highlight area -->
-                   <tr>
-                    <td valign="top" class="column-content">
-                      <xsl:copy-of select="html/node()"/>
-                    </td>
-                  </tr>
-
-              </table>
-              <!-- END SUB-SECTION -->
-
-            </xsl:if>
-
+        <tr>
+          <td align="left" valign="middle" bgcolor="#00458c" style="color:#fff;" class="section-header">
+          <h2>
+            <xsl:choose>
+              <xsl:when test="header-link/link != '/'">
+                <a href="{header-link/link}{$tracking-vars}"><xsl:value-of select="$header-text"/></a>
+              </xsl:when>
+              <xsl:when test="header-url != ''">
+                <a href="{header-url}{$tracking-vars}"><xsl:value-of select="$header-text"/></a>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="$header-text"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </h2>
           </td>
+        </tr>
 
-        </xsl:for-each>
+      </xsl:if>
 
-      </tr>
-    </table>
+      <!-- BLOCK CONTENT: you choose a block (preferably an RSS feed block) to show up -->
+      <xsl:if test="column-block/path != '/'">
+        <tr class="feed-blocks">
 
-  </td>
-</tr>
+          <xsl:choose>
+            <!-- Feed item list -->
+            <xsl:when test="column-block/content//item">
+            <td valign="top" bgcolor="#f2f6f9" class="row messages">
+
+              <!-- Number of feed items to show -->
+              <xsl:variable name="totalItems">
+                  <xsl:value-of select="item-limit"/>
+              </xsl:variable>
+
+              <ul class="message-list">
+                <xsl:for-each select="column-block//item">
+                  <xsl:if test="position() &lt; ($totalItems+1)">
+                    <li><strong><a href="{link}{$tracking-vars}"><xsl:value-of select="title"/></a></strong></li>
+                  </xsl:if>
+                </xsl:for-each>
+              </ul>
+            </td>
+            </xsl:when>
+
+            <!-- HTML block -->
+            <xsl:when test="column-block/content !=''">
+              <td valign="top" bgcolor="#f2f6f9" class="item">
+                <xsl:copy-of select="column-block/content/node()"/>
+              </td>
+            </xsl:when>
+
+            <!-- Alert if no block selected -->
+            <xsl:otherwise>
+              <td valign="top" bgcolor="#f2f6f9" class="item">
+                <p>NO BLOCK SELECTED</p>
+              </td>
+            </xsl:otherwise>
+          </xsl:choose>
+
+        </tr>
+      </xsl:if>
+
+      <!-- If there is WYSIWYG content, place it below the feed. -->
+      <xsl:if test="html/node() !=''">
+        <tr>
+          <td valign="top" bgcolor="#f2f6f9" class="item">
+            <xsl:copy-of select="html/node()"/>
+          </td>
+        </tr>
+      </xsl:if>
+
+    </xsl:for-each>
 
 </xsl:template>
 
