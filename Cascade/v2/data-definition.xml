@@ -27,7 +27,7 @@
         </group>
     </group>
     <!-- Section: campus messages -->
-    <group identifier="messages-section" label="Campus messages">
+    <group identifier="messages-section" label="Campus messages" multiple="true">
         <text identifier="header" label="Item header"/>
         <asset type="page" identifier="header-link" label="Page for header link"/>
         <text identifier="header-url" label="Or paste a URL for the header link"/>
