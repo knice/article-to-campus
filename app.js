@@ -5,15 +5,16 @@ var cheerio     = require('cheerio');
 var juice       = require('juice');
 var url         = require('url');
 var fs          = require('fs');
+var path        = require('path');
 
 var savePath     = "./issues/";
 var location    = process.argv[2];
 var issue       = process.argv[3];
 
 var address     = url.parse(location);
-var path        = address.pathname.split('/');
+var pagePath    = path.parse(location).dir;
 var filename    = issue;
-var site        = "http://" + address.host;
+var site        = "https://" + address.host;
 
 // Let us know you've started
 console.log('Fetching: ' + location);
@@ -44,7 +45,7 @@ request(location, function(error, response, body) {
       // Crudely see if the path is relative or absolute
       if (imgsrc.indexOf('http') == -1) {
         // Prepend the site path to the 'src' attr
-        $(this).attr('src', site + imgsrc);
+        $(this).attr('src', pagePath + "/" + imgsrc);
       };
     });
 
@@ -59,23 +60,17 @@ request(location, function(error, response, body) {
       };
     });
 
-    var html = $.html();
+    $('.breadcrumbs').remove();
+    $('.vcard').remove();
+    $('.social-sharing').remove();
+    $('*').removeAttr('style');
+    var html = $('.main-content').html();
     var fileOutput = savePath + filename + ".html";
 
     // Write the local file
     fs.writeFile(fileOutput, html, function (err) {
       if (err) throw err;
       console.log(location + ' saved as => ' + filename + '.html');
-    });
-
-    // Juice the file and write it out
-    juice(fileOutput, function(err, outp) {
-
-      fs.writeFile(fileOutput, outp, function (err) {
-        if (err) throw err;
-        console.log(location + ' inlined and saved into => issues/' + filename + '.html');
-      });      
-
     });
 
 });
