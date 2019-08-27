@@ -10,8 +10,8 @@
   "author": "Rob Knight",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "cheerio": "~0.13.1",
-    "juice": "^0.5.0",
-    "request": "~2.33.0"
+    "cheerio": "^0.22.0",
+    "juice": "^5.2.0",
+    "request": "^2.88.0"
   }
 }
