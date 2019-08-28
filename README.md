@@ -18,14 +18,13 @@ Run the following command to fetch a page:
 `node app.js` [URL-to-fetch] [name-of-saved-file]
 
 Example:
-`node app.js http://news.ucsc.edu/tuesday-newsday/2014/december-16/index.html 2014-12-16`
+`node app.js https://news.ucsc.edu/2019/07/frank-honduras-book.html frank-book`
 
 ## What it does
 
 1. The page is fetched.
 2. All URLs in the HTML (images, stylesheets, etc) are made absolute with cheerio.
 3. The file is saved with the name you provided.
-4. The CSS in the file is inlined with juice and saved again.
 
 It's not **nearly** as elegant as I would like it to be. But it does the job for now.
 
