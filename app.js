@@ -3,6 +3,8 @@
 var request     = require('request');
 var cheerio     = require('cheerio');
 var juice       = require('juice');
+var pug         = require('pug');
+
 var url         = require('url');
 var fs          = require('fs');
 var path        = require('path');
@@ -65,10 +67,16 @@ request(location, function(error, response, body) {
     $('.social-sharing').remove();
     $('*').removeAttr('style');
     var html = $('.main-content').html();
+
+    var emailFile = pug.renderFile('./templates/email.pug', {
+      body: html,
+      title: "Welcome"
+    });
+
     var fileOutput = savePath + filename + ".html";
 
     // Write the local file
-    fs.writeFile(fileOutput, html, function (err) {
+    fs.writeFile(fileOutput, emailFile, function (err) {
       if (err) throw err;
       console.log(location + ' saved as => ' + filename + '.html');
     });

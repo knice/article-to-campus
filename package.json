@@ -13,5 +13,8 @@
     "cheerio": "^0.22.0",
     "juice": "^5.2.0",
     "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "pug": "^2.0.4"
   }
 }
