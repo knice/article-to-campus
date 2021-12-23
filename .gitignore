@@ -1,3 +1,4 @@
 _design-assets
 node_modules
 .DS_Store
+build
