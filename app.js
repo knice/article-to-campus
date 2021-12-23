@@ -9,6 +9,7 @@ var sanitizeHtml = require("sanitize-html");
 
 /** Node libraries */
 var fs = require("fs");
+const { exitCode } = require("process");
 
 /** Variables */
 var savePath = "./build/";
@@ -36,6 +37,11 @@ const juiceOptions = {
   preserveImportant: true,
 };
 
+if (address.host !== "news.ucsc.edu") {
+  console.error(`Stopping... AC cannot fetch content from ${address.host}`);
+  process.exit(1);
+}
+
 /** Mention that you've started the script */
 console.log("Fetching: " + location);
 
@@ -51,8 +57,6 @@ request(location, function (error, response, body) {
       h3: "h2",
     },
   });
-
-  //console.log(sanitized);
 
   // Load the response into the parser
   var $ = cheerio.load(sanitized);
@@ -93,10 +97,19 @@ request(location, function (error, response, body) {
   var sentTo = $(".message-to").text();
   var sentFrom = $(".message-from").text();
 
+  function friendlyTo(to) {
+    return to ? "<p>Dear " + to + ",</p>" : "<p>Dear Campus Community,</p>";
+  }
+
+  function friendlyFrom(from) {
+    from = from.split(";").join("<br>");
+    return from ? "<p>Sincerely,<br>" + from + "</p>" : null;
+  }
+
   $("figure").remove();
   $(".article-body *").removeAttr("style");
-  $(".article-body").prepend("<p>Dear " + sentTo + ",</p>");
-  $(".article-body").append("<p>Sincerely,<br>" + sentFrom + "</p>");
+  $(".article-body").prepend(friendlyTo(sentTo));
+  $(".article-body").append(friendlyFrom(sentFrom));
 
   var html = $(".article-body").html();
 
