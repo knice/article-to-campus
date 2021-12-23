@@ -1,6 +1,6 @@
 {
   "name": "ucsc-email",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "repository": "https://github.com/knice/email",
   "description": "Fetch a web page and prepare it for email.",
   "main": "app.js",
