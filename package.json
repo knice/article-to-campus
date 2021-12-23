@@ -11,10 +11,9 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "cheerio": "^0.22.0",
+    "handlebars": "^4.7.7",
     "juice": "^5.2.0",
-    "request": "^2.88.0"
-  },
-  "devDependencies": {
-    "pug": "^2.0.4"
+    "request": "^2.88.0",
+    "sanitize-html": "^2.6.1"
   }
 }

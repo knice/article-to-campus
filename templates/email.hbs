@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+  </head>
+
+  <body translate="no">
+    <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+      <tr>
+        <td align="center">
+          <table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td class="header">
+                <p>
+                  <a href="https://www.ucsc.edu">
+                    <img src="https://res.cloudinary.com/ucsc/image/upload/v1639690875/Logos/2021-uc-santa-cruz-light.png" class="logo" alt="UC Santa Cruz" />
+                  </a>
+                </p>
+              </td>
+            </tr>
+
+            {{!-- Email Body --}}
+            <tr>
+              <td class="body" width="100%" cellpadding="0" cellspacing="0">
+                <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0"
+                  role="presentation">
+                  {{!-- Body content --}}
+                  <tr>
+                    <td class="content-cell">
+                      <p>{{ fetched }}</p>
+                      {{{body}}}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <table class="footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
+                  <tr>
+                    <td class="content-cell" align="center">
+                      <p>&copy; 2021 Campus Broadcasts. All rights reserved.</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+
+</html>
