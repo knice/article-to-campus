@@ -135,6 +135,10 @@ request(location, function (error, response, body) {
         juiceOptions
       );
 
+      if (!fs.existsSync(savePath)) {
+        fs.mkdirSync(savePath);
+      }
+
       var fileOutput = savePath + filename;
 
       // Write the local file
