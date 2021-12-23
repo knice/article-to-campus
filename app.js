@@ -1,84 +1,134 @@
 "use strict";
 
-var request     = require('request');
-var cheerio     = require('cheerio');
-var juice       = require('juice');
-var pug         = require('pug');
+/** Required packages */
+var request = require("request");
+var cheerio = require("cheerio");
+var juice = require("juice");
+var hbs = require("handlebars");
+var sanitizeHtml = require("sanitize-html");
 
-var url         = require('url');
-var fs          = require('fs');
-var path        = require('path');
+/** Node libraries */
+var fs = require("fs");
 
-var savePath     = "./issues/";
-var location    = process.argv[2];
-var issue       = process.argv[3];
+/** Variables */
+var savePath = "./build/";
+var location = process.argv[2];
+var address = new URL(location);
+var pagePath = address.pathname;
+var issue = pagePath.split("/");
+var filename = issue[issue.length - 1];
+var site = "https://" + address.host;
 
-var address     = url.parse(location);
-var pagePath    = path.parse(location).dir;
-var filename    = issue;
-var site        = "https://" + address.host;
+/** Options for the CSS inliner */
+const juiceOptions = {
+  extraCss: "",
+  applyStyleTags: true,
+  removeStyleTags: true,
+  preserveMediaQueries: true,
+  preserveFontFaces: true,
+  preserveKeyFrames: true,
+  insertPreservedExtraCss: true,
+  applyWidthAttributes: true,
+  applyHeightAttributes: true,
+  applyAttributesTableElements: true,
+  inlinePseudoElements: true,
+  xmlMode: true,
+  preserveImportant: true,
+};
 
-// Let us know you've started
-console.log('Fetching: ' + location);
+/** Mention that you've started the script */
+console.log("Fetching: " + location);
 
-request(location, function(error, response, body) {
-  
-    // Report errors
-    if (error) throw error;
+request(location, function (error, response, body) {
+  // Report errors
+  if (error) throw error;
 
-    // Load the response into the parser
-    var $ = cheerio.load(body);
-    
-    // Iterate over <link> tags to look for relative 'href' paths 
-    $('link').map(function(i, el) {
-      // Get the 'src' attr for the image
-      var linksrc = $(this).attr('href');
-      // Crudely see if the path is relative or absolute
-      if (linksrc.indexOf('http') == -1) {
-        // Prepend the site path to the 'src' attr
-        $(this).attr('href', site + linksrc);
-      };
-    });    
-    
-    // Iterate over <img> tags to look for relative 'src' paths 
-    $('img').map(function(i, el) {
-      // Get the 'src' attr for the image
-      var imgsrc = $(this).attr('src');
-      // Crudely see if the path is relative or absolute
-      if (imgsrc.indexOf('http') == -1) {
-        // Prepend the site path to the 'src' attr
-        $(this).attr('src', pagePath + "/" + imgsrc);
-      };
+  var sanitized = sanitizeHtml(body, {
+    allowedAttributes: {
+      "*": ["href", "class", "alt", "src", "title"],
+    },
+    transformTags: {
+      h3: "h2",
+    },
+  });
+
+  //console.log(sanitized);
+
+  // Load the response into the parser
+  var $ = cheerio.load(sanitized);
+
+  // Iterate over <link> tags to look for relative 'href' paths
+  $("link").map(function (i, el) {
+    // Get the 'src' attr for the image
+    var linksrc = $(this).attr("href");
+    // Crudely see if the path is relative or absolute
+    if (linksrc.indexOf("http") == -1) {
+      // Prepend the site path to the 'src' attr
+      $(this).attr("href", site + linksrc);
+    }
+  });
+
+  // Iterate over <img> tags to look for relative 'src' paths
+  $("img").map(function (i, el) {
+    // Get the 'src' attr for the image
+    var imgsrc = $(this).attr("src");
+    // Crudely see if the path is relative or absolute
+    if (imgsrc.indexOf("http") == -1) {
+      // Prepend the site path to the 'src' attr
+      $(this).attr("src", pagePath + "/" + imgsrc);
+    }
+  });
+
+  // Iterate over <a> tags to look for relative 'href' paths
+  $("a").map(function (i, el) {
+    // Get the 'href' attr for the image
+    var asrc = $(this).attr("href");
+    // Crudely see if the path is relative or absolute
+    if (asrc.indexOf("http") == -1) {
+      // Prepend the site path to the 'src' attr
+      $(this).attr("href", site + asrc);
+    }
+  });
+
+  var sentTo = $(".message-to").text();
+  var sentFrom = $(".message-from").text();
+
+  $("figure").remove();
+  $(".article-body *").removeAttr("style");
+  $(".article-body").prepend("<p>Dear " + sentTo + ",</p>");
+  $(".article-body").append("<p>Sincerely,<br>" + sentFrom + "</p>");
+
+  var html = $(".article-body").html();
+
+  // Use Handlebars to convert the list of sample pages
+  // to an index file for the local test server
+  fs.readFile("templates/email.hbs", async function (err, templateFile) {
+    hbs.registerHelper("fetched", function () {
+      var date = new Date().toLocaleDateString("en-us", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      return date;
     });
 
-    // Iterate over <a> tags to look for relative 'href' paths 
-    $('a').map(function(i, el) {
-      // Get the 'href' attr for the image
-      var asrc = $(this).attr('href');
-      // Crudely see if the path is relative or absolute
-      if (asrc.indexOf('http') == -1) {
-        // Prepend the site path to the 'src' attr
-        $(this).attr('href', site + asrc);
-      };
+    var template = hbs.compile(templateFile.toString());
+    var htmlCompiled = template({ body: html, title: "Campus Message" });
+
+    fs.readFile("templates/message.css", function (err, templateStyles) {
+      var inlinedHtml = juice.inlineContent(
+        htmlCompiled,
+        templateStyles.toString(),
+        juiceOptions
+      );
+
+      var fileOutput = savePath + filename;
+
+      // Write the local file
+      fs.writeFile(fileOutput, inlinedHtml, function (err) {
+        if (err) throw err;
+        console.log(location + " saved as => " + filename);
+      });
     });
-
-    $('.breadcrumbs').remove();
-    $('.vcard').remove();
-    $('.social-sharing').remove();
-    $('*').removeAttr('style');
-    var html = $('.main-content').html();
-
-    var emailFile = pug.renderFile('./templates/email.pug', {
-      body: html,
-      title: "Welcome"
-    });
-
-    var fileOutput = savePath + filename + ".html";
-
-    // Write the local file
-    fs.writeFile(fileOutput, emailFile, function (err) {
-      if (err) throw err;
-      console.log(location + ' saved as => ' + filename + '.html');
-    });
-
+  });
 });
